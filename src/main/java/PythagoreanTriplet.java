@@ -1,56 +1,53 @@
 import java.util.*;
+
 public class PythagoreanTriplet {
-    private int a;
-    private int b;
-    private int c;
+    private final int a;
+    private final int b;
+    private final int c;
+
     public PythagoreanTriplet(int a, int b, int c) {
         this.a = a;
         this.b = b;
         this.c = c;
     }
-    public String toString() {
-        return String.format("(%d, %d, %d)", a, b, c);
-    }
+
     public boolean equals(Object o) {
-        if ( this == o ) {
+        if (this == o) {
             return true;
-        } else if ( o instanceof PythagoreanTriplet ) {
-            PythagoreanTriplet pt = (PythagoreanTriplet) o;
+        } else if (o instanceof PythagoreanTriplet pt) {
             return a == pt.a && b == pt.b && c == pt.c;
         } else {
             return false;
         }
     }
+
     public static TripletsList makeTripletsList() {
         return new TripletsList();
     }
+
     public static class TripletsList {
-        private int n;
+        private int sum;
         private Integer maxFactor = null;
 
-        private static final double PERIMETER_RATIO_LIMIT = 1 + 1 + Math.sqrt(2);
         public TripletsList withFactorsLessThanOrEqualTo(int maxFactor) {
             this.maxFactor = maxFactor;
             return this;
         }
-        public TripletsList thatSumTo(int n) {
-            this.n = n;
-            if ( maxFactor == null ) {
-                maxFactor = n;
-            }
 
+        public TripletsList thatSumTo(int sum) {
+            this.sum = sum;
+            if (maxFactor == null) {
+                maxFactor = sum;
+            }
             return this;
         }
 
         public List<PythagoreanTriplet> build() {
             List<PythagoreanTriplet> triplets = new ArrayList<>();
-            for (int a = 1; a <= Math.floor(n / PERIMETER_RATIO_LIMIT); a++) {
-                int numerator = a * a + (int) Math.pow(n-a, 2);
-                int denominator = 2 * (n - a);
-                if ( numerator % denominator == 0 ) {
-                    int c = numerator / denominator;
-                    if ( c <= maxFactor ) {
-                        int b = n - a - c;
+            for (int a = 1; a < sum; a++) {
+                for (int b = a + 1; b < sum; b++) {
+                    int c = sum - a - b;
+                    if (c > 0 && a * a + b * b == c * c && c <= maxFactor) {
                         triplets.add(new PythagoreanTriplet(a, b, c));
                     }
                 }

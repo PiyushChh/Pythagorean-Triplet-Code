@@ -1,10 +1,7 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PythagoreanTripletTest {
@@ -135,7 +132,7 @@ public class PythagoreanTripletTest {
                         .thatSumTo(30000)
                         .build();
         List<PythagoreanTriplet> expected
-                = Arrays.asList(new PythagoreanTriplet(7500, 10000, 12500));
+                = List.of(new PythagoreanTriplet(7500, 10000, 12500));
         assertThat(actual).isEqualTo(expected);
     }
 }
