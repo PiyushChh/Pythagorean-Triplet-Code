@@ -42,13 +42,13 @@ public class PythagoreanTriplet {
             return this;
         }
 
-        public int gcd(int a,int b){
-                while (b != 0) {
-                    int temp = b;
-                    b = a % b;
-                    a = temp;
-                }
-                return a;
+        public int gcd(int a, int b) {
+            while (b != 0) {
+                int temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
         }
 
         public List<PythagoreanTriplet> build() {
@@ -56,8 +56,8 @@ public class PythagoreanTriplet {
             for (int a = 1; a <= sum; a++) {
                 for (int b = a + 1; b <= sum; b++) {
                     int c = sum - a - b;
-                    int gcd=gcd(c,gcd(a,b));
-                    if (c > 0 && a * a + b * b == c * c && c<=maxFactor && gcd<= maxFactor) {
+                    int gcd = gcd(c, gcd(a, b));
+                    if (c > 0 && a * a + b * b == c * c && c <= maxFactor && gcd <= maxFactor) {
                         triplets.add(new PythagoreanTriplet(a, b, c));
                     }
                 }
