@@ -42,12 +42,22 @@ public class PythagoreanTriplet {
             return this;
         }
 
+        public int gcd(int a,int b){
+                while (b != 0) {
+                    int temp = b;
+                    b = a % b;
+                    a = temp;
+                }
+                return a;
+        }
+
         public List<PythagoreanTriplet> build() {
             List<PythagoreanTriplet> triplets = new ArrayList<>();
-            for (int a = 1; a < sum; a++) {
-                for (int b = a + 1; b < sum; b++) {
+            for (int a = 1; a <= sum; a++) {
+                for (int b = a + 1; b <= sum; b++) {
                     int c = sum - a - b;
-                    if (c > 0 && a * a + b * b == c * c && c <= maxFactor) {
+                    int gcd=gcd(c,gcd(a,b));
+                    if (c > 0 && a * a + b * b == c * c && c<=maxFactor && gcd<= maxFactor) {
                         triplets.add(new PythagoreanTriplet(a, b, c));
                     }
                 }
